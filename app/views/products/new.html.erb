@@ -1,0 +1,39 @@
+<%= content_for(:title, "Додати продукт") %>
+
+<h2 class="mb-4">Додати продукт</h2>
+
+<%= form_with model: @product, local: true, html: { multipart: true } do |form| %>
+  <!-- Контейнер для кнопки -->
+  <div class="button-wrapper">
+    <%= form.submit "Створити продукт", class: 'button button__primary' %>
+  </div>
+
+  <!-- Форма -->
+  <div class="form-group mb-4">
+    <%= form.label :name, "Назва продукту", class: 'form-label' %>
+    <%= form.text_field :name, class: 'input' %>
+  </div>
+
+  <div class="form-group mb-4">
+    <%= form.label :description, "Опис продукту", class: 'form-label' %>
+    <%= form.text_area :description, class: 'input input--textarea' %>
+  </div>
+
+  <div class="form-group mb-4">
+    <%= form.label :price, "Ціна", class: 'form-label' %>
+    <%= form.text_field :price, class: 'input' %>
+  </div>
+
+  <div class="form-group mb-4">
+    <%= form.label :category, "Категорія", class: 'form-label' %>
+    <%= form.select :category, ["Навушники", "Портативні колонки", "Музичні центри"],
+                    { prompt: "Оберіть категорію..." },
+                    class: 'input' %>
+  </div>
+
+  <div class="form-group mb-4">
+    <%= form.label :image, "Зображення", class: 'form-label' %>
+    <%= form.file_field :image, class: 'input' %>
+  </div>
+<% end %>
+

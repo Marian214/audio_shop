@@ -1,0 +1,13 @@
+<%= content_for(:without_default_wrapper, true) %>
+<%= content_for(:without_footer, true) %>
+<%= stylesheet_link_tag 'auth', media: 'all' %>
+
+
+<div class="auth-container">
+  <div class="auth-box">
+    <%= yield %>
+    <div class="auth-links">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

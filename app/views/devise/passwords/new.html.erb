@@ -1,0 +1,16 @@
+<%= render layout: "layouts/auth" do %>
+  <h1>Забули пароль?</h1>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="mb-4">
+      <%= f.label :email, "Електронна пошта" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.submit "Надіслати листа", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+<% end %>

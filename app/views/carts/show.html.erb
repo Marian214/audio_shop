@@ -1,0 +1,51 @@
+<%= content_for(:title, "Кошик") %>
+
+<div class="container my-5">
+  <h1 class="text-center">Кошик</h1>
+
+  <% if @cart_items.any? %>
+    <div class="table-responsive my-4">
+      <table class="table table-bordered">
+        <thead class="table-dark">
+        <tr>
+          <th>Продукт</th>
+          <th>Кількість</th>
+          <th>Ціна</th>
+          <th>Дії</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @cart_items.each do |item| %>
+          <tr>
+            <td><strong><%= item.product.name %></strong></td>
+            <td>
+              <div class="d-flex align-items-center">
+                <%= button_to '-', decrease_quantity_cart_item_path(item), method: :post, class: "btn btn-outline-secondary btn-sm me-2" %>
+                <span class="mx-2"><%= item.quantity %></span>
+                <%= button_to '+', increase_quantity_cart_item_path(item), method: :post, class: "btn btn-outline-secondary btn-sm ms-2" %>
+              </div>
+            </td>
+            <td><%= number_to_currency(item.product.price * item.quantity) %></td>
+            <td>
+              <%= button_to 'Видалити', remove_cart_path(item), method: :delete, class: "btn btn-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <p class="fs-5"><strong>Загальна сума: <%= number_to_currency(@cart_items.sum { |item| item.product.price * item.quantity }) %></strong></p>
+      <div class="d-flex gap-2">
+        <%= link_to "Назад до продуктів", "javascript:history.back()", class: "btn btn-outline-secondary" %>
+        <%= button_to 'Очистити кошик', clear_cart_path, method: :delete, class: "btn btn-outline-danger" %>
+        <%= link_to "Оформити замовлення", checkout_cart_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% else %>
+    <div class="alert alert-warning text-center">
+      <p>Ваш кошик порожній. <%= link_to "Почати покупки", products_path, class: "alert-link" %></p>
+    </div>
+  <% end %>
+</div>

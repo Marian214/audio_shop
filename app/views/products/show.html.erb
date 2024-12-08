@@ -1,0 +1,64 @@
+<%= content_for(:title, "Продукт: " + @product.name) %>
+<%= stylesheet_link_tag "products", media: "all" %>
+
+<div class="product-details">
+  <div class="first-column">
+    <div class="image-with-placeholder">
+      <% if @product.image.attached? %>
+        <%= image_tag @product.image %>
+      <% end %>
+    </div>
+    <div class="summary">
+      <h1>
+        <%= @product.name %>
+      </h1>
+      <p class="product-details__price">
+        <%= @product.price %>$
+      </p>
+      <%= form_for :cart_item, url: cart_items_path, method: :post do |form| %>
+
+        <%= hidden_field_tag :product_id, @product.id %>
+        <div class="flex" style="gap: 20px;">
+          <%= number_field_tag :quantity, 1, min: 1, class: "input" %>
+          <%= form.submit "Додати до кошика", class: "button button__primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <p>
+    <%= @product.description %>
+  </p>
+
+  <h2>Коментарі</h2>
+
+  <% if @product.comments.any? %>
+    <% @product.comments.each do |comment| %>
+      <div class="comment">
+        <div class="comment-content">
+          <div class="username">
+            Автор: <%= comment.user.email %>
+          </div>
+          <div class="comment-text">
+            <%= comment.body %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="empty-state">
+      Ще немає коментарів. Станьте першим, хто залишить коментар!
+    </div>
+  <% end %>
+
+  <h2>Додати коментар</h2>
+
+  <%= form_for([@product, @product.comments.build]) do |form| %>
+    <div class="mb-3">
+      <%= form.text_area :body, class: "input" %>
+    </div>
+    <div class="mb-4">
+      <%= form.submit "Додати коментар", class: "button button__primary" %>
+    </div>
+  <% end %>
+</div>

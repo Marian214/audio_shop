@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title><%= content_for(:title) || "AudioShop" %></title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <!-- Meta Tags for CSRF Protection & Content Security Policy -->
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <!-- Custom head content -->
+  <%= yield :head %>
+
+  <!-- Favicons -->
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
+
+  <!-- Font Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Inline CSS -->
+  <style>
+      header {
+          background-color: #555; /* Світліший сірий */
+          color: #fff;           /* Білий текст */
+          padding: 10px;
+      }
+
+      .btn {
+          background-color: #4a4a4a; /* Темніший сірий для кнопок */
+          color: #fff;               /* Білий текст */
+          border: none;              /* Прибрана рамка */
+          border-radius: 5px;        /* Невелике закруглення для гарного вигляду */
+      }
+
+      .btn:hover {
+          background-color: #3d3d3d; /* Трохи темніший сірий на ховер */
+      }
+  </style>
+
+  <!-- Import Map for JavaScript -->
+  <%= javascript_importmap_tags %>
+</head>
+
+<body>
+<% unless devise_controller? %>
+  <%= render 'layouts/header' %>
+<% end %>
+
+<main style="flex-grow: 1;">
+  <% if content_for?(:without_default_wrapper) %>
+    <%= yield %>
+  <% else %>
+    <div class="container mb-4 p-5">
+      <%= yield %>
+    </div>
+  <% end %>
+</main>
+<%= stylesheet_link_tag "products", media: "all", "data-turbo-track": "reload" %>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

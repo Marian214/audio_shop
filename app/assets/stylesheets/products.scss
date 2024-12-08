@@ -1,0 +1,262 @@
+/* Загальні стилі */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7; /* Світлий фон для сторінки */
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Заголовок */
+header {
+  position: sticky !important;
+  background-color: #333; /* Темно-сірий фон */
+  color: #fff;
+  padding: 10px 20px;
+}
+
+header a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
+
+/* Фільтр категорій */
+.category-filter {
+  background-color: #555; /* Трохи світліший темно-сірий фон */
+  color: #fff;
+  padding: 20px;
+  height: 100vh; /* Розтягуємо на всю висоту сторінки */
+  box-sizing: border-box; /* Враховуємо padding у висоті */
+  position: fixed;
+  left: 0;
+  top: 56px; /* Відступ для навбару */
+  width: 200px;
+}
+
+.category-filter h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.category-filter ul {
+  list-style: none;
+  padding: 0;
+}
+
+.category-filter li {
+  margin-bottom: 10px;
+}
+
+.category-filter a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.category-filter a:hover {
+  text-decoration: underline;
+}
+
+/* Продукти */
+.product-list {
+  margin-left: 220px; /* Відступ для бічної панелі */
+  padding: 20px;
+}
+
+.product-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  text-align: center;
+}
+
+.product-card h3 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.product-card__price {
+  font-weight: bold;
+  color: #333;
+}
+
+.product-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-card-link:hover .product-card {
+  border-color: #999;
+}
+
+.product-card-link:hover {
+  color: grey;
+}
+
+/* Кнопки */
+button {
+  background-color: #666; /* Світліший темно-сірий фон */
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #777; /* Трохи світліший відтінок */
+}
+
+.button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button__primary {
+  background-color: grey;
+  color: white;
+}
+
+.button__primary:hover {
+  background-color: darkgrey;
+}
+
+.create-product-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #666; /* Світліший темно-сірий фон */
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.create-product-button:hover {
+  background-color: #777;
+}
+
+/* Деталі продукту */
+.product-details {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.first-column {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.image-with-placeholder img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.summary h1 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.product-details__price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: grey;
+  margin-bottom: 20px;
+}
+
+.product-details .add-to-cart-form {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.product-details .form-control {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.product-details .btn-primary,
+.product-details .btn-success {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+}
+
+.product-details .btn-primary:hover,
+.product-details .btn-success:hover {
+  background-color: #5a6268;
+}
+
+/* Коментарі */
+.comment {
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+}
+
+.comment:last-child {
+  border-bottom: none;
+}
+
+.username {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.comment-text {
+  font-size: 0.9rem;
+}
+
+.comment-form textarea {
+  width: 100%;
+  height: 150px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.comment-form button {
+  margin-top: 10px;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .first-column {
+    flex-direction: column;
+  }
+
+  .summary {
+    margin-top: 20px;
+  }
+
+  .category-filter {
+    position: relative;
+    height: auto;
+    width: 100%;
+    top: 0;
+  }
+
+  .product-list {
+    margin-left: 0;
+  }
+}

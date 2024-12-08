@@ -1,0 +1,19 @@
+<%= render layout: "layouts/auth" do %>
+  <h1 class="mb-4">Увійти</h1>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="mb-4">
+      <%= f.label :email, "Електронна пошта" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :password, "Пароль" %><br />
+      <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.submit "Увійти", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+<% end %>

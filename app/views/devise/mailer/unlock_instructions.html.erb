@@ -1,0 +1,13 @@
+<div style="padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+  <p>Вітаємо, <%= @resource.name || @resource.email %>!</p>
+
+  <p>Ваш акаунт заблоковано через надмірну кількість невдалих спроб увійти в систему.</p>
+
+  <p>Натисніть на посилання нижче, щоб розблокувати ваш акаунт:</p>
+
+  <p>
+    <a href="<%= unlock_url(@resource, unlock_token: @token) %>" style="padding: 12px 24px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 4px;">
+      Розблокувати акаунт
+    </a>
+  </p>
+</div>

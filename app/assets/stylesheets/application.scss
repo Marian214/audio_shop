@@ -1,0 +1,9 @@
+body {
+  padding-top: 56px; /* Висота навбару */
+}
+
+@media (max-width: 991.98px) {
+  body {
+    padding-top: 70px; /* Додатковий відступ для мобільних пристроїв */
+  }
+}

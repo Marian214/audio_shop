@@ -1,0 +1,115 @@
+<%= content_for(:title, "Оформлення замовлення") %>
+
+<div class="container my-5">
+  <h1 class="text-center">Оформлення замовлення</h1>
+
+  <% if @cart&.cart_items&.any? %>
+    <div class="table-responsive my-4">
+      <table class="table table-bordered">
+        <thead class="table-dark">
+        <tr>
+          <th>Продукт</th>
+          <th>Кількість</th>
+          <th>Ціна</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @cart_items.each do |item| %>
+          <tr>
+            <td><strong><%= item.product.name %></strong></td>
+            <td><%= item.quantity %></td>
+            <td><%= number_to_currency(item.product.price * item.quantity) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="text-end">Загальна сума: <%= number_to_currency(@cart_items.sum { |item| item.product.price * item.quantity }) %></h2>
+
+    <div class="card my-4">
+      <div class="card-body">
+        <h3 class="card-title">Дані для замовлення</h3>
+
+        <%= form_with model: @order, url: orders_path, local: true, class: 'row g-3' do |f| %>
+          <div class="col-md-6">
+            <%= f.label :name, "ПІБ", class: "form-label" %>
+            <%= f.text_field :name, class: "form-control #{'is-invalid' if @order.errors[:name].any?}" %>
+            <% if @order.errors[:name].any? %>
+              <div class="invalid-feedback"><%= @order.errors.full_messages_for(:name).join(", ") %></div>
+            <% end %>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.label :email, "Email", class: "form-label" %>
+            <%= f.email_field :email, class: "form-control #{'is-invalid' if @order.errors[:email].any?}" %>
+            <% if @order.errors[:email].any? %>
+              <div class="invalid-feedback"><%= @order.errors.full_messages_for(:email).join(", ") %></div>
+            <% end %>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.label :phone, "Номер телефону", class: "form-label" %>
+            <%= f.telephone_field :phone, class: "form-control #{'is-invalid' if @order.errors[:phone].any?}" %>
+            <% if @order.errors[:phone].any? %>
+              <div class="invalid-feedback"><%= @order.errors.full_messages_for(:phone).join(", ") %></div>
+            <% end %>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.label :address, "Адреса", class: "form-label" %>
+            <%= f.text_field :address, class: "form-control #{'is-invalid' if @order.errors[:address].any?}" %>
+            <% if @order.errors[:address].any? %>
+              <div class="invalid-feedback"><%= @order.errors.full_messages_for(:address).join(", ") %></div>
+            <% end %>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.label :delivery_method, "Метод доставки", class: "form-label" %>
+            <%= f.select :delivery_method, ["Нова пошта", "Укрпошта", "Кур'єр"],
+                         { prompt: "Виберіть метод доставки..." },
+                         class: "form-select #{'is-invalid' if @order.errors[:delivery_method].any?}" %>
+            <% if @order.errors[:delivery_method].any? %>
+              <div class="invalid-feedback"><%= @order.errors.full_messages_for(:delivery_method).join(", ") %></div>
+            <% end %>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.label :payment_method, "Метод оплати", class: "form-label" %>
+            <%= f.select :payment_method, ["Готівка", "Кредитна картка"],
+                         { prompt: "Виберіть метод оплати..." },
+                         class: "form-select #{'is-invalid' if @order.errors[:payment_method].any?}" %>
+            <% if @order.errors[:payment_method].any? %>
+              <div class="invalid-feedback"><%= @order.errors.full_messages_for(:payment_method).join(", ") %></div>
+            <% end %>
+          </div>
+
+          <div class="col-md-12">
+            <%= f.label :delivery_address, "Адреса доставки (якщо відрізняється від основної)", class: "form-label" %>
+            <%= f.text_field :delivery_address, class: "form-control #{'is-invalid' if @order.errors[:delivery_address].any?}" %>
+            <% if @order.errors[:delivery_address].any? %>
+              <div class="invalid-feedback"><%= @order.errors.full_messages_for(:delivery_address).join(", ") %></div>
+            <% end %>
+          </div>
+
+          <div class="col-md-12">
+            <%= f.label :comment, "Коментар", class: "form-label" %>
+            <%= f.text_area :comment, class: "form-control #{'is-invalid' if @order.errors[:comment].any?}" %>
+            <% if @order.errors[:comment].any? %>
+              <div class="invalid-feedback"><%= @order.errors.full_messages_for(:comment).join(", ") %></div>
+            <% end %>
+          </div>
+
+          <div class="col-12 d-flex justify-content-between mt-4">
+            <%= f.submit "Оформити замовлення", class: 'btn btn-primary' %>
+            <%= link_to "Перейти до кошика", cart_path, class: "btn btn-secondary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="alert alert-warning text-center">
+      <p>Ваш кошик порожній. <%= link_to "Перейти до продуктів", products_path, class: "alert-link" %></p>
+    </div>
+  <% end %>
+</div>

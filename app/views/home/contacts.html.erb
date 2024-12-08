@@ -1,0 +1,38 @@
+<%= content_for(:title, "Контакти") %>
+
+<div class="container my-5">
+  <h1 class="text-center">Контакти</h1>
+  <hr />
+
+  <h2 class="text-center my-4">Залиште відгук</h2>
+
+  <%= form_with model: @feedback, url: create_feedback_path, local: true, class: "row g-3" do |form| %>
+    <div class="col-md-6">
+      <%= form.label :name, "Ваше ім'я", class: "form-label" %>
+      <%= form.text_field :name, class: "form-control #{'is-invalid' if @feedback.errors[:name].any?}" %>
+      <% if @feedback.errors[:name].any? %>
+        <div class="invalid-feedback"><%= @feedback.errors.full_messages_for(:name).join(", ") %></div>
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :email, "Ваша електронна пошта", class: "form-label" %>
+      <%= form.email_field :email, class: "form-control #{'is-invalid' if @feedback.errors[:email].any?}" %>
+      <% if @feedback.errors[:email].any? %>
+        <div class="invalid-feedback"><%= @feedback.errors.full_messages_for(:email).join(", ") %></div>
+      <% end %>
+    </div>
+
+    <div class="col-12">
+      <%= form.label :message, "Ваше повідомлення", class: "form-label" %>
+      <%= form.text_area :message, rows: 5, class: "form-control #{'is-invalid' if @feedback.errors[:message].any?}" %>
+      <% if @feedback.errors[:message].any? %>
+        <div class="invalid-feedback"><%= @feedback.errors.full_messages_for(:message).join(", ") %></div>
+      <% end %>
+    </div>
+
+    <div class="col-12 text-center mt-4">
+      <%= form.submit "Надіслати відгук", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

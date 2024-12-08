@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <style>
+      /* Для кращої підтримки на поштових клієнтах додаємо інлайн стилі */
+      body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f4f4f4;
+      }
+
+      .email-container {
+          width: 100%;
+          max-width: 600px;
+          margin: 0 auto;
+          background-color: #ffffff;
+          padding: 20px;
+      }
+
+      .email-header {
+          background-color: #007bff;
+          color: white;
+          padding: 20px;
+          text-align: center;
+      }
+
+      .email-content {
+          margin-top: 20px;
+          font-size: 16px;
+          line-height: 1.5;
+      }
+
+      .footer {
+          text-align: center;
+          font-size: 12px;
+          color: #888;
+          margin-top: 40px;
+      }
+  </style>
+</head>
+
+<body>
+<div class="email-container">
+  <div class="email-header">
+    <h1>Деталі вашого акаунту</h1>
+  </div>
+
+  <div class="email-content">
+    <%= yield %>
+  </div>
+
+  <div class="footer">
+    <p>Якщо у вас є запитання, будь ласка, звертайтеся до нашої служби підтримки.</p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  username: postgres
+  password: 1
+  host: localhost
+
+development:
+  <<: *default
+  database: audioshop_development
+  host: localhost
+
+test:
+  <<: *default
+  database: audioshop_test
+  host: localhost
+
+production:
+  <<: *default
+  database: audioshop_prod
+  host: <%= ENV['DATABASE_URL'] %> # Use your production host or a cloud service URL
+  port: 5432

@@ -1,0 +1,6 @@
+default: &default
+  service: local
+
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
